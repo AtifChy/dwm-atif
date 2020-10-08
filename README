@@ -46,3 +46,20 @@ Configuration
 -------------
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
+
+Installed patches
+-----------------
+1. alternativetags
+2. autostart
+3. awesomebar
+4. centeredmaster
+5. floatrules
+6. movestacks
+7. resizecorners
+8. restartsig
+9. statuspadding
+10. sticky
+11. systray
+12. vanitygaps
+13. xrdb
+
