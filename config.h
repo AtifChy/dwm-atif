@@ -18,7 +18,7 @@ static const int horizpadbar        = 2;        /* horizontal padding for status
 static const int vertpadbar         = 1;        /* vertical padding for statusbar */
 static const char *fonts[]          = { "Fira Code Medium:size=10:antialias=true:autohint=true" };
 static const char dmenufont[]       = "Fira Code Medium:size=10:antialias=true:autohint=true";
-static const char w[] 		    = "1915"; 	/* dmenu width 	*/
+static const char w[] 		    = "1914"; 	/* dmenu width 	*/
 static const char p[] 		    = "Run:";   /* prompt  */
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -89,11 +89,18 @@ static const char *dmenucmd[] = {
 				};
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "brave", NULL };
+static const char *clipmenucmd[] = {
+				   "clipmenu",
+				   "-i",
+				   "-w", w,
+				   NULL
+				   };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY, 			XK_c, 	   spawn, 	   {.v = clipmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b, 	   spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
