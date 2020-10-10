@@ -53,13 +53,15 @@ Installed patches
 2. autostart
 3. awesomebar
 4. centeredmaster
-5. floatrules
-6. movestacks
-7. resizecorners
-8. restartsig
-9. statuspadding
-10. sticky
-11. systray
-12. vanitygaps
-13. xrdb
+5. centeredwindowname
+6. cyclelayouts
+7. floatrules
+8. movestacks
+9. resizecorners
+10. restartsig
+11. statuspadding
+12. sticky
+13. systray
+14. vanitygaps
+15. xrdb
 
