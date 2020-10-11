@@ -20,6 +20,7 @@ static const char *fonts[]          = { "Fira Code Medium:size=10:antialias=true
 static const char dmenufont[]       = "Fira Code Medium:size=10:antialias=true:autohint=true";
 static const char w[] 		    = "1914"; 	/* dmenu width 	*/
 static const char p[] 		    = "Run:";   /* prompt  */
+static const char hp[] 		    = "chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst";  /* if you want dmenu to find an app quickly then add it here */
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -30,7 +31,7 @@ static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-	[SchemeHid]  = { selbgcolor,  normbgcolor, selbgcolor  },
+       [SchemeHid]  = { selbgcolor,  normbgcolor, selbgcolor  },
 };
 
 /* tagging */
@@ -85,6 +86,7 @@ static const char *dmenucmd[] = {
 				"-sf", selfgcolor,
 				"-w", w,
 				"-p", p,
+				"-hp", hp,
 				NULL
 				};
 static const char *termcmd[]  = { "st", NULL };
