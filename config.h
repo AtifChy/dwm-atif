@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;   	/* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -11,13 +11,13 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static const int showsystray        = 1;     	/* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 1;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Fira Code Medium:size=10:antialias=true:autohint=true" };
-static const char dmenufont[]       = "Fira Code Medium:size=10:antialias=true:autohint=true";
+static const char *fonts[]          = { "Fira Code:size=10:antialias=true:autohint=true" };
+static const char dmenufont[]       = "Fira Code:size=10:antialias=true:autohint=true";
 static const char w[] 		    = "1914"; 	/* dmenu width 	*/
 static const char p[] 		    = "Run:";   /* prompt  */
 static const char hp[] 		    = "chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst";  /* if you want dmenu to find an app quickly then add it here */
