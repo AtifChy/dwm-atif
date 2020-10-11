@@ -14,23 +14,44 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int horizpadbar        = 2;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 1;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Fira Code Medium:size=10:antialias=true:autohint=true" };
-static const char dmenufont[]       = "Fira Code Medium:size=10:antialias=true:autohint=true";
-static const char w[] 		    = "1915"; 	/* dmenu width 	*/
+static const char *fonts[]          = { "Fira Code Medium:size=10" };
+static const char dmenufont[]       = "Fira Code Medium:size=10";
+static const char w[] 		    = "1914"; 	/* dmenu width 	*/
 static const char p[] 		    = "Run:";   /* prompt  */
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
-static char *colors[][3] = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-	[SchemeHid]  = { selbgcolor,  normbgcolor, selbgcolor  },
+static const char hp[] 		    = "chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst";  /* if you want dmenu to find an app quickly then add it here */
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
+static const char col1[]            = "#eeeeee";
+static const char col2[]            = "#eeeeee";
+static const char col3[]            = "#eeeeee";
+static const char col4[]            = "#eeeeee";
+static const char col5[]            = "#eeeeee";
+static const char col6[]            = "#eeeeee";
+static const char col7[]            = "#eeeeee";
+static const char col8[]            = "#eeeeee";
+static const char col9[]            = "#eeeeee";
+static const char col10[]           = "#eeeeee";
+static const char col11[]           = "#eeeeee";
+static const char col12[]           = "#eeeeee";
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm]  = { col_gray3, col_gray1, col_gray2 },
+	[SchemeCol1]  = { col1,      col_gray1, col_gray2 },
+	[SchemeCol2]  = { col2,      col_gray1, col_gray2 },
+	[SchemeCol3]  = { col3,      col_gray1, col_gray2 },
+	[SchemeCol4]  = { col4,      col_gray1, col_gray2 },
+	[SchemeCol5]  = { col5,      col_gray1, col_gray2 },
+	[SchemeCol6]  = { col6,      col_gray1, col_gray2 },
+	[SchemeCol7]  = { col7,      col_gray1, col_gray2 },
+	[SchemeCol8]  = { col8,      col_gray1, col_gray2 },
+	[SchemeCol9]  = { col8,      col_gray1, col_gray2 },
+	[SchemeCol10] = { col10,     col_gray1, col_gray2 },
+	[SchemeCol11] = { col11,     col_gray1, col_gray2 },
+	[SchemeCol12] = { col12,     col_gray1, col_gray2 },
+	[SchemeSel]   = { col_gray4, col_cyan,  col_cyan  },
 };
 
 /* tagging */
@@ -59,7 +80,6 @@ static const Layout layouts[] = {
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
-	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -79,28 +99,32 @@ static const char *dmenucmd[] = {
 				"dmenu_run",
 				"-m", dmenumon,
 				"-fn", dmenufont,
-				"-nb", normbgcolor,
-				"-nf", normfgcolor,
-				"-sb", selbordercolor,
-				"-sf", selfgcolor,
+				"-nb", col_gray1,
+				"-nf", col_gray3,
+				"-sb", col_cyan,
+				"-sf", col_gray4,
 				"-w", w,
 				"-p", p,
+				"-hp", hp,
 				NULL
 				};
 static const char *termcmd[]  = { "st", NULL };
-static const char *browsercmd[] = { "brave", NULL };
+static const char *clipmenucmd[] = {
+				   "clipmenu",
+				   "-i",
+				   "-w", w,
+				   NULL
+				   };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY, 			XK_c, 	   spawn, 	   {.v = clipmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_b, 	   spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstackvis,  {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_j,      focusstackhid,  {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = -1 } },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -132,20 +156,15 @@ static Key keys[] = {
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
-	{ MODKEY|ControlMask,           XK_s,      show,           {0} },
-	{ MODKEY|ControlMask,           XK_h,      hide,           {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -165,9 +184,10 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
