@@ -51,16 +51,14 @@ Installed patches
 -----------------
 1. alternativetags
 2. autostart
-3. awesomebar
-4. centeredmaster
-5. cyclelayouts
+3. centeredmaster
+4. cyclelayouts
+5. dwmblocks
 6. floatrules
 7. movestacks
 8. resizecorners
 9. restartsig
-10. statuspadding
-11. sticky
-12. systray
-13. vanitygaps
-14. xrdb
+10. sticky
+11. systray
+12. vanitygaps
 
