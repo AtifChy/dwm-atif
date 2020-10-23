@@ -255,9 +255,11 @@ static const char *clipmenucmd[] = {
 
 static const char *emojicmd[] = {
 				"dmenu_emoji",
+				NULL
 				};
 static const char *powercmd[] = {
 				"dmenu_power",
+				NULL
 				};
 
 /* volume controls */
