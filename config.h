@@ -252,26 +252,6 @@ static const char *clipmenucmd[] = {
 				   "-p", p1,
 				   NULL
 				   };
-
-static const char *emojicmd[] = {
-				"dmenu_emoji",
-				NULL
-				};
-static const char *powercmd[] = {
-				"dmenu_power",
-				NULL
-				};
-
-/* volume controls */
-static const char *volup[] = {
-			     "volup"
-			     };
-static const char *voldown[] = {
-			     "voldown"
-			     };
-static const char *vol_mute_umute[] = {
-			     "vol_mute_umute"
-				      };
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "brave", NULL };
 
@@ -281,12 +261,12 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
 	{ MODKEY, 			XK_c, 	       spawn, 	   	       {.v = clipmenucmd } },
-	{ MODKEY, 			XK_x, 	       spawn, 		       {.v = emojicmd } },
+	{ MODKEY, 			XK_x, 	       spawn, 		       SHCMD("dmenu_emoji") },
 	{ MODKEY|ShiftMask, 		XK_b, 	       spawn, 		       {.v = browsercmd } },
-	{ MODKEY, 			XK_F10,        spawn, 		       {.v = vol_mute_umute } },
-	{ MODKEY, 			XK_F12,        spawn, 		       {.v = volup } },
-	{ MODKEY, 			XK_F11,        spawn, 		       {.v = voldown } },
-	{ MODKEY, 			XK_Escape,     spawn, 		       {.v = powercmd } },
+	{ MODKEY, 			XK_F10,        spawn, 		       SHCMD("vol_mute_umute") },
+	{ MODKEY, 			XK_F12,        spawn, 		       SHCMD("volup") },
+	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("voldown") },
+	{ MODKEY, 			XK_Escape,     spawn, 		       SHCMD("dmenu_power") },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
 	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
