@@ -46,31 +46,6 @@ static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
 
 /*
-static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
-static char titlenormbordercolor[]       = "#444444";
-static char titlenormfloatcolor[]        = "#db8fd9";
-
-static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
-static char titleselbordercolor[]        = "#005577";
-static char titleselfloatcolor[]         = "#005577";
-
-static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
-static char tagsnormbordercolor[]        = "#444444";
-static char tagsnormfloatcolor[]         = "#db8fd9";
-
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
-static char tagsselbordercolor[]         = "#005577";
-static char tagsselfloatcolor[]          = "#005577";
-
-static char hidfgcolor[]                 = "#005577";
-static char hidbgcolor[]                 = "#222222";
-static char hidbordercolor[]             = "#005577";
-static char hidfloatcolor[]              = "#f76e0c";
-
 static char urgfgcolor[]                 = "#bbbbbb";
 static char urgbgcolor[]                 = "#222222";
 static char urgbordercolor[]             = "#ff0000";
@@ -87,7 +62,6 @@ static const unsigned int alphas[][3] = {
 	[SchemeTitleSel]     = { OPAQUE, baralpha, borderalpha },
         [SchemeTagsNorm]     = { OPAQUE, baralpha, borderalpha },
         [SchemeTagsSel]      = { OPAQUE, baralpha, borderalpha },
-//	[SchemeHid]          = { OPAQUE, baralpha, borderalpha },
 //	[SchemeUrg]          = { OPAQUE, baralpha, borderalpha },
 };
 
@@ -99,7 +73,6 @@ static char *colors[][ColCount] = {
 	[SchemeTitleSel]     = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
         [SchemeTagsNorm]     = { normfgcolor,  	   normbgcolor,      normbordercolor,      normfloatcolor },
         [SchemeTagsSel]      = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-//	[SchemeHid]          = { hidfgcolor,       hidbgcolor,       hidbordercolor,       hidfloatcolor },
 //	[SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor },
 };
 
