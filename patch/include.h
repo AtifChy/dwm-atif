@@ -23,7 +23,6 @@
 #include "sticky.h"
 #include "vanitygaps.h"
 #include "winview.h"
-#include "xrdb.h"
 /* Layouts */
 #include "layout_centeredmaster.h"
 #include "layout_deck.h"

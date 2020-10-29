@@ -27,7 +27,7 @@ static const char font[]                 = "Fira Code Bold 10";
 static const char dmenufont[]            = "Fira Code:style=Bold:size=10";
 // dmenu configuration
 static const char x[] 		    	 = "15";
-static const char y[] 	 	    	 = "8";
+static const char y[] 	 	    	 = "9";
 static const char w[] 		    	 = "1886"; 	/* dmenu width 	*/
 static const char p[] 		    	 = "Run:";   	/* prompt  */
 static const char p1[] 		    	 = "Clipmenu:";
@@ -46,36 +46,12 @@ static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
 
 /*
-static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
-static char titlenormbordercolor[]       = "#444444";
-static char titlenormfloatcolor[]        = "#db8fd9";
-
-static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
-static char titleselbordercolor[]        = "#005577";
-static char titleselfloatcolor[]         = "#005577";
-
-static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
-static char tagsnormbordercolor[]        = "#444444";
-static char tagsnormfloatcolor[]         = "#db8fd9";
-
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
-static char tagsselbordercolor[]         = "#005577";
-static char tagsselfloatcolor[]          = "#005577";
-
-static char hidfgcolor[]                 = "#005577";
-static char hidbgcolor[]                 = "#222222";
-static char hidbordercolor[]             = "#005577";
-static char hidfloatcolor[]              = "#f76e0c";
-
 static char urgfgcolor[]                 = "#bbbbbb";
 static char urgbgcolor[]                 = "#222222";
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
 */
+
 
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
@@ -85,9 +61,8 @@ static const unsigned int alphas[][3] = {
 	[SchemeSel]          = { OPAQUE, baralpha, borderalpha },
 	[SchemeTitleNorm]    = { OPAQUE, baralpha, borderalpha },
 	[SchemeTitleSel]     = { OPAQUE, baralpha, borderalpha },
-        [SchemeTagsNorm]     = { OPAQUE, baralpha, borderalpha },
-        [SchemeTagsSel]      = { OPAQUE, baralpha, borderalpha },
-//	[SchemeHid]          = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsNorm]     = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsSel]      = { OPAQUE, baralpha, borderalpha },
 //	[SchemeUrg]          = { OPAQUE, baralpha, borderalpha },
 };
 
@@ -95,11 +70,10 @@ static char *colors[][ColCount] = {
 	/*                       fg                bg                border                float */
 	[SchemeNorm]         = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeSel]          = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-	[SchemeTitleNorm]    = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
+	[SchemeTitleNorm]    = { normfgcolor, 	   normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeTitleSel]     = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-        [SchemeTagsNorm]     = { normfgcolor,  	   normbgcolor,      normbordercolor,      normfloatcolor },
-        [SchemeTagsSel]      = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-//	[SchemeHid]          = { hidfgcolor,       hidbgcolor,       hidbordercolor,       hidfloatcolor },
+	[SchemeTagsNorm]     = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
+	[SchemeTagsSel]      = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
 //	[SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor },
 };
 
@@ -271,8 +245,8 @@ static Key keys[] = {
 	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("voldown") },
 	{ MODKEY, 			XK_Escape,     spawn, 		       SHCMD("dmenu_power") },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
-	{ MODKEY,                       XK_k,          focusstack,             {.i = +1 } },
-	{ MODKEY,                       XK_j,          focusstack,             {.i = -1 } },
+	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
+	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
@@ -280,8 +254,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,          setcfact,               {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,          setcfact,               {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,          setcfact,               {0} },
-	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
 	{ MODKEY|Mod1Mask,              XK_u,          incrgaps,               {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
@@ -304,7 +278,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {1} },
 	{ MODKEY,                       XK_o,          winview,                {0} },
-	{ MODKEY|ShiftMask,             XK_F5,         xrdb,                   {.v = NULL } },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },

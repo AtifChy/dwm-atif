@@ -24,7 +24,6 @@
 #include "sticky.c"
 #include "vanitygaps.c"
 #include "winview.c"
-#include "xrdb.c"
 /* Layouts */
 #include "layout_facts.c"
 #include "layout_centeredmaster.c"
