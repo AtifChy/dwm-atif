@@ -45,14 +45,6 @@ static char selbgcolor[]                 = "#005577";
 static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
 
-/*
-static char urgfgcolor[]                 = "#bbbbbb";
-static char urgbgcolor[]                 = "#222222";
-static char urgbordercolor[]             = "#ff0000";
-static char urgfloatcolor[]              = "#db8fd9";
-*/
-
-
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][3] = {
@@ -63,7 +55,6 @@ static const unsigned int alphas[][3] = {
 	[SchemeTitleSel]     = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsNorm]     = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsSel]      = { OPAQUE, baralpha, borderalpha },
-//	[SchemeUrg]          = { OPAQUE, baralpha, borderalpha },
 };
 
 static char *colors[][ColCount] = {
@@ -74,9 +65,7 @@ static char *colors[][ColCount] = {
 	[SchemeTitleSel]     = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
 	[SchemeTagsNorm]     = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeTagsSel]      = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-//	[SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor },
 };
-
 
 
 
