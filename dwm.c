@@ -1450,7 +1450,8 @@ manage(Window w, XWindowAttributes *wa)
 	if (getatomprop(c, netatom[NetWMState]) == netatom[NetWMFullscreen])
 		setfullscreen(c, 1);
 	updatewmhints(c);
-
+	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
 
@@ -1652,21 +1653,9 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
-	unsigned int n;
-	Window *junk = malloc(1);
-
-	XQueryTree(dpy, root, junk, junk, &junk, &n);
-
-	if (n <= quit_empty_window_count)
-	{
-		if (arg->i)
-			restart = 1;
-		running = 0;
-	}
-	else
-		printf("[dwm] not exiting (n=%d)\n", n);
-
-	free(junk);
+	if (arg->i)
+		restart = 1;
+	running = 0;
 
 }
 
