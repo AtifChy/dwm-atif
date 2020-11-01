@@ -23,7 +23,7 @@ static const int showsystray             = 1;   /* 0 means no systray */
 /* Indicators: see patch/bar_indicators.h for options */
 static int tagindicatortype              = INDICATOR_BOTTOM_BAR;
 static int floatindicatortype            = INDICATOR_BOTTOM_BAR;
-static const int quit_empty_window_count = 2;   /* only allow dwm to quit if no windows are open, value here represents number of deamons */
+static const int quit_empty_window_count = 12;   /* only allow dwm to quit if no windows are open, value here represents number of deamons */
 static const char font[]                 = "Fira Code Bold 10";
 static const char dmenufont[]            = "Fira Code:style=Bold:size=10";
 // dmenu configuration
