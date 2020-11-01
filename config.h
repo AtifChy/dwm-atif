@@ -32,7 +32,7 @@ static const char w[] 		    	 = "1886"; 	/* dmenu width 	*/
 static const char p[] 		    	 = "Run:";   	/* prompt  */
 static const char p1[] 		    	 = "Clipmenu:";
 static const char h[] 			 = "24";
-static const char hp[] 		    	 = "discord,simplescreenrecorder,alacritty,dwmblocks,chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst";  /* if you want dmenu to find an app quickly then add it here */
+static const char hp[] 		    	 = "discord,lightcord,simplescreenrecorder,alacritty,dwmblocks,chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst";  /* if you want dmenu to find an app quickly then add it here */
 
 
 static char normfgcolor[]                = "#bbbbbb";
@@ -306,10 +306,19 @@ static Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	{ ClkLtSymbol,          0,                   Button1,        cyclelayout,    {.i = +1 } },
 	{ ClkLtSymbol,          0,                   Button3,        cyclelayout,    {.i = -1 } },
-	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
+	{ ClkClientWin,         MODKEY|ShiftMask,    Button2,        zoom,           {0} },
+	{ ClkRootWin,           0,                   Button2,        spawn,          {.v = termcmd } },
+	{ ClkClientWin,         MODKEY,              Button4,        setmfact,       {.f = +0.05} },
+	{ ClkClientWin,         MODKEY,              Button5,        setmfact,       {.f = -0.05} },
+	{ ClkClientWin,         Mod1Mask,            Button4,        setcfact,       {.f = +0.25} },
+	{ ClkClientWin,         Mod1Mask,            Button5,        setcfact,       {.f = -0.25} },
+	{ ClkWinTitle,          0,                   Button4,        focusstack,     {.i = -1 } },
+	{ ClkWinTitle,          0,                   Button5,        focusstack,     {.i = +1 } },
 	{ ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1 } },
 	{ ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2 } },
 	{ ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3 } },
+	{ ClkStatusText,        0,                   Button4,        sigdwmblocks,   {.i = 4 } },
+	{ ClkStatusText,        0,                   Button5,        sigdwmblocks,   {.i = 5 } },
 	{ ClkClientWin,         MODKEY,              Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,              Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,              Button3,        resizemouse,    {0} },
