@@ -45,6 +45,7 @@ static char selbgcolor[]                 = "#005577";
 static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
 
+
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][3] = {
@@ -66,6 +67,7 @@ static char *colors[][ColCount] = {
 	[SchemeTagsNorm]     = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeTagsSel]      = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
 };
+
 
 
 
@@ -218,24 +220,24 @@ static const char *clipmenucmd[] = {
 				   "-h", h,
 				   NULL
 				   };
-static const char *termcmd[]  = { "alacritty", NULL };
+// static const char *termcmd[]  = { "alacritty", NULL };
 
 
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  SHCMD("$TERMINAL") },
 	{ MODKEY, 			XK_c, 	       spawn, 	   	       {.v = clipmenucmd } },
 	{ MODKEY, 			XK_x, 	       spawn, 		       SHCMD("dmenu_emoji") },
-	{ MODKEY|ShiftMask, 		XK_b, 	       spawn, 		       SHCMD("brave") },
+	{ MODKEY|ShiftMask, 		XK_b, 	       spawn, 		       SHCMD("$BROWSER") },
 	{ MODKEY, 			XK_F10,        spawn, 		       SHCMD("vol_mute_umute") },
 	{ MODKEY, 			XK_F12,        spawn, 		       SHCMD("volup") },
 	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("voldown") },
 	{ MODKEY, 			XK_Escape,     spawn, 		       SHCMD("dmenu_power") },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
-	{ MODKEY,                       XK_k,          focusstack,             {.i = +1 } },
-	{ MODKEY,                       XK_j,          focusstack,             {.i = -1 } },
+	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
+	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
@@ -243,8 +245,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,          setcfact,               {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,          setcfact,               {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,          setcfact,               {0} },
-	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
 	{ MODKEY|Mod1Mask,              XK_u,          incrgaps,               {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
@@ -307,7 +309,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,                   Button1,        cyclelayout,    {.i = +1 } },
 	{ ClkLtSymbol,          0,                   Button3,        cyclelayout,    {.i = -1 } },
 	{ ClkClientWin,         MODKEY|ShiftMask,    Button2,        zoom,           {0} },
-	{ ClkRootWin,           0,                   Button2,        spawn,          {.v = termcmd } },
+	{ ClkRootWin,           0,                   Button2,        spawn,          SHCMD("$TERMINAL") },
 	{ ClkClientWin,         MODKEY,              Button4,        setmfact,       {.f = +0.05} },
 	{ ClkClientWin,         MODKEY,              Button5,        setmfact,       {.f = -0.05} },
 	{ ClkClientWin,         Mod1Mask,            Button4,        setcfact,       {.f = +0.25} },
