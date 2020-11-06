@@ -23,8 +23,8 @@ static const int showsystray             = 1;   /* 0 means no systray */
 /* Indicators: see patch/bar_indicators.h for options */
 static int tagindicatortype              = INDICATOR_BOTTOM_BAR;
 static int floatindicatortype            = INDICATOR_BOTTOM_BAR;
-static const char font[]                 = "Fira Code Bold 10";
-static const char dmenufont[]            = "Fira Code:style=Bold:size=10";
+static const char font[]                 = "JetBrains Mono Bold 10";
+static const char dmenufont[]            = "JetBrains Mono:style=Bold:size=10";
 // dmenu configuration
 static const char x[] 		    	 = "15";
 static const char y[] 	 	    	 = "9";
@@ -135,6 +135,10 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
 	RULE(.class = "Gimp", .tags = 1 << 4)
 	RULE(.class = "Firefox", .tags = 1 << 7)
+	RULE(.class = "Brave-browser", .tags = 1 << 1) 			/* open at tag 2 */
+	RULE(.class = "discord", .tags = 1 << 2) 			/* open at tag 3 */
+	RULE(.class = "lightcord", .tags = 1 << 2) 			/* open at tag 3 */
+	RULE(.class = "code", .tags = 1 << 3) 				/* open at tag 4 */
 };
 
 
@@ -236,8 +240,8 @@ static Key keys[] = {
 	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("voldown") },
 	{ MODKEY, 			XK_Escape,     spawn, 		       SHCMD("dmenu_power") },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
-	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
-	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
+	{ MODKEY,                       XK_k,          focusstack,             {.i = +1 } },
+	{ MODKEY,                       XK_j,          focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
@@ -245,8 +249,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,          setcfact,               {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,          setcfact,               {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,          setcfact,               {0} },
-	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_k,          movestack,              {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_j,          movestack,              {.i = -1 } },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
 	{ MODKEY|Mod1Mask,              XK_u,          incrgaps,               {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
@@ -314,8 +318,8 @@ static Button buttons[] = {
 	{ ClkClientWin,         MODKEY,              Button5,        setmfact,       {.f = -0.05} },
 	{ ClkClientWin,         Mod1Mask,            Button4,        setcfact,       {.f = +0.25} },
 	{ ClkClientWin,         Mod1Mask,            Button5,        setcfact,       {.f = -0.25} },
-	{ ClkWinTitle,          0,                   Button4,        focusstack,     {.i = -1 } },
-	{ ClkWinTitle,          0,                   Button5,        focusstack,     {.i = +1 } },
+	{ ClkWinTitle,          0,                   Button4,        movestack,      {.i = -1 } },
+	{ ClkWinTitle,          0,                   Button5,        movestack,      {.i = +1 } },
 	{ ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1 } },
 	{ ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2 } },
 	{ ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3 } },
