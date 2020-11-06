@@ -10,7 +10,9 @@
 #include "bar_statuscmd.h"
 #include "bar_tags.h"
 #include "bar_wintitle.h"
+#include "bar_awesomebar.h"
 #include "bar_systray.h"
+#include "bar_wintitleactions.h"
 
 /* Other patches */
 #include "autostart.h"
@@ -25,6 +27,7 @@
 #include "winview.h"
 /* Layouts */
 #include "layout_centeredmaster.h"
+#include "layout_centeredfloatingmaster.h"
 #include "layout_deck.h"
 #include "layout_fibonacci.h"
 #include "layout_grid.h"

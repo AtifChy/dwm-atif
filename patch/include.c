@@ -11,7 +11,9 @@
 #include "bar_statuscolors.c"
 #include "bar_tags.c"
 #include "bar_wintitle.c"
+#include "bar_awesomebar.c"
 #include "bar_systray.c"
+#include "bar_wintitleactions.c"
 
 /* Other patches */
 #include "autostart.c"
@@ -27,6 +29,7 @@
 /* Layouts */
 #include "layout_facts.c"
 #include "layout_centeredmaster.c"
+#include "layout_centeredfloatingmaster.c"
 #include "layout_deck.c"
 #include "layout_fibonacci.c"
 #include "layout_grid.c"

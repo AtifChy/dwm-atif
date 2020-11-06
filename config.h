@@ -22,17 +22,18 @@ static const unsigned int systrayspacing = 4;   /* systray spacing */
 static const int showsystray             = 1;   /* 0 means no systray */
 /* Indicators: see patch/bar_indicators.h for options */
 static int tagindicatortype              = INDICATOR_BOTTOM_BAR;
+static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_BOTTOM_BAR;
 static const char font[]                 = "JetBrains Mono Bold 10";
 static const char dmenufont[]            = "JetBrains Mono:style=Bold:size=10";
-// dmenu configuration
+/* dmenu configuration */
 static const char x[] 		    	 = "15";
 static const char y[] 	 	    	 = "9";
 static const char w[] 		    	 = "1886"; 	/* dmenu width 	*/
 static const char p[] 		    	 = "Run:";   	/* prompt  */
 static const char p1[] 		    	 = "Clipmenu:";
 static const char h[] 			 = "24";
-static const char hp[] 		    	 = "discord,lightcord,simplescreenrecorder,alacritty,dwmblocks,chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst";  /* if you want dmenu to find an app quickly then add it here */
+static const char hp[] 		    	 = "discord,lightcord,simplescreenrecorder,alacritty,dwmblocks,chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst,qbittorrent";  /* if you want dmenu to find an app quickly then add it here */
 
 
 static char normfgcolor[]                = "#bbbbbb";
@@ -45,6 +46,12 @@ static char selbgcolor[]                 = "#005577";
 static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
 
+static char titlenormbgcolor[]           = "#333333";
+
+static char hidfgcolor[]                 = "#005577";
+static char hidbgcolor[]                 = "#333333";
+static char hidfloatcolor[]              = "#f76e0c";
+
 
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
@@ -56,16 +63,19 @@ static const unsigned int alphas[][3] = {
 	[SchemeTitleSel]     = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsNorm]     = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsSel]      = { OPAQUE, baralpha, borderalpha },
+	[SchemeHid]          = { OPAQUE, baralpha, borderalpha },
+	[SchemeUrg]          = { OPAQUE, baralpha, borderalpha },
 };
 
 static char *colors[][ColCount] = {
 	/*                       fg                bg                border                float */
 	[SchemeNorm]         = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeSel]          = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
-	[SchemeTitleNorm]    = { normfgcolor, 	   normbgcolor,      normbordercolor,      normfloatcolor },
+	[SchemeTitleNorm]    = { normfgcolor, 	   titlenormbgcolor, normbordercolor,      normfloatcolor },
 	[SchemeTitleSel]     = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
 	[SchemeTagsNorm]     = { normfgcolor,      normbgcolor,      normbordercolor,      normfloatcolor },
 	[SchemeTagsSel]      = { selfgcolor,       selbgcolor,       selbordercolor,       selfloatcolor },
+	[SchemeHid]          = { hidfgcolor,       hidbgcolor,       selbordercolor,       hidfloatcolor },
 };
 
 
@@ -139,6 +149,7 @@ static const Rule rules[] = {
 	RULE(.class = "discord", .tags = 1 << 2) 			/* open at tag 3 */
 	RULE(.class = "lightcord", .tags = 1 << 2) 			/* open at tag 3 */
 	RULE(.class = "code", .tags = 1 << 3) 				/* open at tag 4 */
+	RULE(.class = "qBittorrent", .tags = 1 << 8) 			/* open at tag 9 */
 };
 
 
@@ -161,7 +172,7 @@ static const BarRule barrules[] = {
 	{  0,       0,     BAR_ALIGN_RIGHT,  width_systray,           draw_systray,           click_systray,           "systray" },
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,          draw_ltsymbol,          click_ltsymbol,          "layout" },
 	{  0,       0,     BAR_ALIGN_RIGHT,  width_status,            draw_status,            click_statuscmd,         "status" },
-	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,          draw_wintitle,          click_wintitle,          "wintitle" },
+	{ -1,       0,     BAR_ALIGN_NONE,   width_awesomebar,        draw_awesomebar,        click_awesomebar,        "awesomebar" },
 };
 
 /* layout(s) */
@@ -176,6 +187,7 @@ static const Layout layouts[] = {
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 	{ "[D]",      deck },
 	{ "[\\]",     dwindle },
 	{ "HHH",      grid },
@@ -197,6 +209,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
+
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
 	"dmenu_run",
@@ -224,7 +237,7 @@ static const char *clipmenucmd[] = {
 				   "-h", h,
 				   NULL
 				   };
-// static const char *termcmd[]  = { "alacritty", NULL };
+//static const char *termcmd[]  = { "st", NULL };
 
 
 
@@ -236,9 +249,10 @@ static Key keys[] = {
 	{ MODKEY, 			XK_x, 	       spawn, 		       SHCMD("dmenu_emoji") },
 	{ MODKEY|ShiftMask, 		XK_b, 	       spawn, 		       SHCMD("$BROWSER") },
 	{ MODKEY, 			XK_F10,        spawn, 		       SHCMD("vol_mute_umute") },
-	{ MODKEY, 			XK_F12,        spawn, 		       SHCMD("volup") },
-	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("voldown") },
+	{ MODKEY, 			XK_F12,        spawn, 		       SHCMD("pamixer --allow-boost -i 1") },
+	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("pamixer --allow-boost -d 1") },
 	{ MODKEY, 			XK_Escape,     spawn, 		       SHCMD("dmenu_power") },
+	{ MODKEY, 			XK_w, 	       spawn, 		       SHCMD("dmenu_websearch") },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY,                       XK_k,          focusstack,             {.i = +1 } },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = -1 } },
@@ -269,6 +283,7 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask,              XK_0,          togglegaps,             {0} },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,          defaultgaps,            {0} },
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
+	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {1} },
@@ -312,7 +327,9 @@ static Button buttons[] = {
 	/* click                event mask           button          function        argument */
 	{ ClkLtSymbol,          0,                   Button1,        cyclelayout,    {.i = +1 } },
 	{ ClkLtSymbol,          0,                   Button3,        cyclelayout,    {.i = -1 } },
-	{ ClkClientWin,         MODKEY|ShiftMask,    Button2,        zoom,           {0} },
+	{ ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
+	{ ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
+	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
 	{ ClkRootWin,           0,                   Button2,        spawn,          SHCMD("$TERMINAL") },
 	{ ClkClientWin,         MODKEY,              Button4,        setmfact,       {.f = +0.05} },
 	{ ClkClientWin,         MODKEY,              Button5,        setmfact,       {.f = -0.05} },
