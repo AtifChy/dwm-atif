@@ -240,7 +240,6 @@ static const char *clipmenucmd[] = {
 //static const char *termcmd[]  = { "st", NULL };
 
 
-
 static Key keys[] = {
 	/* modifier                     key            function                argument */
 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
@@ -253,6 +252,7 @@ static Key keys[] = {
 	{ MODKEY, 			XK_F11,        spawn, 		       SHCMD("pamixer --allow-boost -d 1") },
 	{ MODKEY, 			XK_Escape,     spawn, 		       SHCMD("dmenu_power") },
 	{ MODKEY, 			XK_w, 	       spawn, 		       SHCMD("dmenu_websearch") },
+	{ MODKEY, 			XK_e, 	       spawn, 		       SHCMD("dmenu_config") },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY,                       XK_k,          focusstack,             {.i = +1 } },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = -1 } },
