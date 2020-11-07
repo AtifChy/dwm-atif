@@ -31,8 +31,9 @@ static const char x[] 		    	 = "15";
 static const char y[] 	 	    	 = "9";
 static const char w[] 		    	 = "1886"; 	/* dmenu width 	*/
 static const char p[] 		    	 = "Run:";   	/* prompt  */
-static const char p1[] 		    	 = "Clipmenu:";
-static const char h[] 			 = "24";
+static const char p1[] 		    	 = "Clipmenu:"; /* clipmenu prompt */
+static const char h[] 			 = "24"; 	/* line height */
+static const char g[] 			 = "3"; 	/* columns */
 static const char hp[] 		    	 = "discord,lightcord,simplescreenrecorder,alacritty,dwmblocks,chromium,brave,systemsettings5,redshift-gtk,nm-applet,picom,dunst,qbittorrent";  /* if you want dmenu to find an app quickly then add it here */
 
 
@@ -229,12 +230,13 @@ static const char *dmenucmd[] = {
 };
 static const char *clipmenucmd[] = {
 				   "clipmenu",
-				   "-i",
+				   "-s",
 				   "-w", w,
 				   "-x", x,
 				   "-y", y,
 				   "-p", p1,
 				   "-h", h,
+				   "-g", g,
 				   NULL
 				   };
 //static const char *termcmd[]  = { "st", NULL };
